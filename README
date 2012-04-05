@@ -1,0 +1,110 @@
+Fuell
+
+FueL naming convention is that functions are named not after what they do, but what they result in, only functions that have side effects are named after what they do.
+
+
+The full power of it is exposed in the `FueL` library. Which provides you with ability to write javascript in a very Haskellish manner, like so:
+map([add, 2], [0, 1, 2, 3]) // produces [2, 3, 4, 5]
+map([[filter, isEven], [map [add, 2]], [0, 1, 2, 3]) // produces [2, 4]
+
+This library comes with several dialects implemented which allows you to use it in the style you're more familiar with.
+
+
+**Dialects**
+Think of dialects as themes for some application. While sometimes radically changing how the application looks they don't affect how it works.
+
+Since this library is highly influenced by the Haskell programming language, its naming conventions have been heavily borrowed from that language. This some people may find unpleasant.
+
+Since this library fuses naming conventions from different languages, the design choice which some may or may not agree with, it comes bundled with dialects allowing you to address its API in a more natural to your programming style way. In future releases dialects are planned to be bundled out of the core library for the sake of its size. Publishing custom dialects is highly appreciated.
+
+
+Conventions:
+1. The target object is placed the last.
+2. If the function name does not suggest the returned object type then it is implied that the type is the same as the target object. Thus `map` target object must be an array.
+3. If the function input is not of the same type as output, the function is considered to be a constructor and its name must suggest the output type.
+
+Note:
+it is still not clear what to do with `firstMatch`
+
+
+
+
+
+
+
+
+
+
+The aim of this library is to bring the order to the world of CoffeeScript and JavaScript by introducing strict conventions.
+This library is highly influenced by the Haskell programming language. It borrows several concepts from it, evolves some and adapts some to the dynamic nature of the JavaScript environment:
+
+1. Basic principles
+  1. Conventions
+    1. No ambiguity. There should always be a single preferred way of solving a problem. Whenever a possible subject for a debate is met a convention must be developed.
+    2. Convention over configuration. Whenever a configuration is possible for performing a simple action a convention should be implied instead.
+  2. Simplicity
+    1. Use what's at your hands. If there already exists an alternative solution use it.
+    1. Prefer simple solutions
+    2. Use the strengths of dynamic language
+    3. Trust the values
+    4. Generalization. More general entities are preferred.
+
+    Following are mostly conventions:
+    1. Use simple constructs whenever it is possible: plain values instead of constants, plain objects instead of some value object instances.
+    2. No complicated OO-facilities mimicing. Use functions and variables instead of static methods and static fields and definitely keep out of OO-(anti)patterns such as Singleton. 
+    3. Functional over object-oriented. There's always a way to solve the problem in functional style. It is better, clearer and preferred.
+    4. Declarative over imperative. 
+    5. Functions over for-comprehensions. Foldings, mappings and filterings solve the same problem and are preferred.
+2. Concepts (borrowed, adapted and introduced)
+  1. Only two possible types of functions: pure functions and actions
+    1. Pure functions are functions taking a value and returning a new one without causing any side-effects.
+    2. Actions are functions returning no value, causing side-effects, optionally asynchronous with callbacks.
+    3. All functions must conform to either of those types.
+  2. Optional values are represented by the actual value or `null`|`undefined`. Constructs such as `Just` or `Nothing` (as in Haskell) or `Some` or `None` (as in Scala) have no purpose in dynamic language.
+  3. Tuple. Arrays are used to represent the tupled values.
+  4. Pair. A tuple (array) consisting of only two items with first one being named a key and the second one a value.
+  5. Map. A plain object mimicking an associative array with string keys. Allows a fast search.
+  6. Pairs. An array of pairs allowing to mimic an associative array.
+
+1. Conventions
+  1.1. Case and delimiters
+    1.1.1. The module names are "UpperCamelCase". This contradicts the NodeJS standard, which btw often becomes the source for hardly traceable bugs when collision of the names of variables and imported modules happens.
+    1.1.2. The package names are "UpperCamelCase".
+    1.1.3. The class names are "UpperCamelCase".
+    1.1.4. All other members' names are "lowerCamelCase". This includes: all sorts of functions, variables and constants (well, pseudo ones, since JS doesn't have that concept)
+    1.1.5. The use of any other naming standards such as "underscored_names", "ALL_CAPS" or "hyphened-names" is prohibited in all cases.
+  1.2. Function naming. Unlike most libraries this one pays respect to the inflection of the word in names of functions.
+    1. FueL introduces a concept of two possible types of functions: 
+      - Pure functions. Functions taking a value and returning a new one without causing any side-effects.
+      - Actions. Functions returning no value, causing side-effects, optionally asynchronous with callbacks.
+    2. Pure functions are named after what they return, thus forming a noun. This evolves the concept of functional programming being declarative.
+    3. Actions
+  3. Constants
+    1. Use of constants is discouraged. Use their values right away instead
+  4. `undefined` and `null` are equal
+
+
+
+|
+This library heavily bases on Haskell standards. Although to satisfy CoffeeScript's needs it changes two conventions:
+1. In the order of function parameters:
+  - the target object goes first instead of last as in Haskell
+  - the functions
+2. Instead of Some and None types the value and `null` are used. There's no purpose for that kind of constructs in dynamic languages.
+
+
+
+
+Fire
+Fury
+Fuell
+FueL - functional library
+It does not include functions for file system as they may be used only by server applications, as much as it doesn't include the browser-specific DOM library.
+
+
+    devtips.nikitavolkov.ru
+
+
+
+Native types and module names.
+So when you have a module exports assigned to a variable `Array` you can address the native `Array` type by `Array.Array`. This takes the native `Array` type exported in the FueL's module `Array`
