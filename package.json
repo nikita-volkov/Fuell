@@ -9,7 +9,7 @@
     "type": "git",
     "url": null
   },
-  "main": "target/Main.js",
+  "main": "js/Fuell.js",
   "directories": {
     "lib": "target"
   },
