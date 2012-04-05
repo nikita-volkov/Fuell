@@ -1,0 +1,14 @@
+{
+  "author": "Nikita Volkov",
+  "name": "Fuell",
+  "description": "",
+  "version": "0.1.0",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~0.4.12"
+  },
+  "dependencies": {"fuel": "0.0.0", "funco": "0.0.0"},
+  "devDependencies": {}
+}
