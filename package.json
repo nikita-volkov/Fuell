@@ -1,14 +1,23 @@
 {
-  "author": "Nikita Volkov",
+  "author": "Nikita Volkov <nikita.y.volkov@mail.ru> (http://www.flipart.ru)",
   "name": "Fuell",
-  "description": "",
+  "description": "A library for purely declarative functional programming with support for async actions",
+  "keywords": ["functional", "declarative", "async", "library", "haskell", "coffeescript"],
   "version": "0.1.0",
+  "homepage": null,
   "repository": {
-    "url": ""
+    "type": "git",
+    "url": null
   },
-  "engines": {
-    "node": "~0.4.12"
+  "main": "target/Main.js",
+  "directories": {
+    "lib": "target"
   },
-  "dependencies": {"fuel": "0.0.0", "funco": "0.0.0"},
-  "devDependencies": {}
+  "scripts": {
+    "test": "jasmine-node spec --coffee"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine-node": "1.0.x"
+  }
 }
