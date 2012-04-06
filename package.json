@@ -3,20 +3,22 @@
   "name": "Fuell",
   "description": "A library for purely declarative functional programming with support for async actions",
   "keywords": ["functional", "declarative", "async", "library", "haskell", "coffeescript"],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": null,
   "repository": {
     "type": "git",
     "url": null
   },
-  "main": "js/Fuell.js",
+  "main": "lib/Fuell.js",
   "directories": {
-    "lib": "target"
+    "lib": "lib"
   },
   "scripts": {
     "test": "jasmine-node spec --coffee"
   },
-  "dependencies": {},
+  "dependencies": {
+    "HOFU": "0.1.1"  
+  },
   "devDependencies": {
     "jasmine-node": "1.0.x"
   }

@@ -2,9 +2,13 @@ String = require "./String"
 Array = require "./Array"
 Strings = require "./Strings"
 
-exports.equals = 
-equals = (y, x) ->
-  throw "TODO: Text.equals"
+# exports.equals = 
+# equals = (y, x) ->
+#   throw "TODO: Text.equals"
+
+# exports.normalized = 
+# normalized = (text) ->
+#   throw "TODO: Text.normalized"
 
 exports.indented = 
 indented = (spaces, text) ->
@@ -14,8 +18,6 @@ indented = (spaces, text) ->
   
   # (indentation + line for line in lines text).join "\n"
   Strings.multilineText Array.results ((l) -> indentation + l), lines text 
-
-
 # exports.indented = 
 # indented = (spaces, text) ->
 #   indentation = repeated spaces, " "
@@ -27,11 +29,6 @@ indentation = (text) ->
   ###
   Detects minimum indentation in text
   ###
-  # r = ""
-  # length = 0
-  # for line in lines
-  #   String
-
   Array.minBy ((indentation) -> indentation.length), 
   Array.results String.indentation, lines text
   

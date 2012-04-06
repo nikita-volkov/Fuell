@@ -103,13 +103,20 @@ firstResult = HOFU.composable (f, xs) ->
 
 exports.result = 
 result = HOFU.composable (f, xs) ->
+  ###
+  Get either the same array or null if it contains a null
+  ###
   for x in xs
     z = f x
     return null if !z?
     z
 
+# processed
 exports.results = 
 results = HOFU.composable (f, xs) ->
+  ###
+  
+  ###
   z for x in xs when (z = f x)?
 
 exports.allMatch = 
