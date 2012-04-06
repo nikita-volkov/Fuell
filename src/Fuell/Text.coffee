@@ -4,11 +4,11 @@ Strings = require "./Strings"
 
 # exports.equals = 
 # equals = (y, x) ->
-#   throw "TODO: Text.equals"
+#   throw "Unimplemented: Text.equals"
 
 # exports.normalized = 
 # normalized = (text) ->
-#   throw "TODO: Text.normalized"
+#   throw "Unimplemented: Text.normalized"
 
 exports.indented = 
 indented = (spaces, text) ->

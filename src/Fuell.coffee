@@ -1,3 +1,4 @@
+# TODO: all the composing and async declarations could be done here
 exports[name] = require "./Fuell/#{name}" for name in [
   "Action"
   "Actions"
@@ -5,6 +6,9 @@ exports[name] = require "./Fuell/#{name}" for name in [
   "Arrays"
   "Environment"
   "Function"
+  "FunctionByLengthMap"
+  "FunctionByTypesPairs"
+  "FunctionTemplate"
   "Keys"
   "Map"
   "Number"

@@ -1,7 +1,7 @@
-HOFU = require "../HOFU"
+FunctionComposing = require "../FunctionComposing"
 
 exports.result = 
-result = HOFU.composable (f, o) ->
+result = FunctionComposing.Function.composable (f, o) ->
   f o if o? 
 
 exports.after = 

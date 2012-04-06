@@ -1,11 +1,13 @@
 Array   = require "./Array"
 Object  = require "./Object"
 Pair    = require "./Pair"
-HOFU    = require "../HOFU"
+Set     = require "./Set"
+
+exports[k] = v for k, v of require "../BasicFunctionComposing/Function"
+exports[k] = v for k, v of require "../FunctionComposing/Function"
+exports[k] = v for k, v of require "../Async/Function"
 
 exports.Function = Function
-
-exports[k] = v for k, v of HOFU
 
 exports.disposable = 
 disposable = (f) -> 
@@ -26,21 +28,11 @@ memoized = (f) ->
       f.cache.push [arguments, r]
       r
 
-exports.withLength =
-withLength = (length, f) ->
-  args = ("a" + i for i in [0...length])
-  body = """
-    return function(#{args.join(", ")}) {
-      return f.apply(this, arguments);
-    }
-  """
-  (new Function "f", body) f
-
 exports.flipped = 
 flipped = (f) -> (x, y) -> f y, x
 
 exports.remapped = 
 remapped = (m, f) -> 
-  throw "Incorrect map" if not Array.empty Array.symmetricDifference m, [0...f.length]
+  throw "Incorrect map" if not Set.equals [0...f.length], m
   ->
     f.apply this, (arguments[i] for i in m)

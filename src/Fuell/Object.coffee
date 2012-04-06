@@ -1,4 +1,4 @@
-HOFU = require "../HOFU"
+FunctionComposing = require "../FunctionComposing"
 
 exports.Object = Object
 
@@ -7,7 +7,7 @@ HIGHER ORDER
 ###
 
 exports.result = 
-result = HOFU.composable (f, o) -> 
+result = FunctionComposing.Function.composable (f, o) -> 
   throw "deprecated: Object.result in favor of Optional.result"
   f o if o? 
 

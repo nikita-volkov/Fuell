@@ -1,8 +1,8 @@
-HOFU = require "../HOFU"
+Async = require "../Async"
 
 # deprecated in favor of `parallel`
 exports.callParallelly = 
-callParallelly = HOFU.async (fs, cb) ->
+callParallelly = Async.Function.async (fs, cb) ->
   results = []
   for f in fs
     f (result) ->
@@ -21,7 +21,7 @@ callConsecutively = (actions, cb) ->
     else cb()
   callNext()
   return
-  # throw "todo: Actions.callConsecutively"
+  # throw "Unimplemented: Actions.callConsecutively"
 
 
 
