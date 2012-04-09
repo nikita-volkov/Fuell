@@ -47,6 +47,16 @@ each = Async.Function.async (action, xs, cb) ->
 HIGHER ORDER 
 ###
 
+exports.count = 
+count = (f, xs) ->
+  ###
+  Count of matching elements
+  ###
+  r = 0
+  r++ for x in xs when f x
+  r
+
+
 # Udon.maximumBy = function(cmp, xs) {
 #     var maxBy = function(x, y) { return cmp(x, y) === 1 ? x : y; };
 #     return Udon.foldl1(maxBy, xs);
@@ -113,6 +123,7 @@ result = FunctionComposing.Function.composable (f, xs) ->
     z
 
 # processed
+# Optionals.results
 exports.results = 
 results = FunctionComposing.Function.composable (f, xs) ->
   ###
@@ -274,6 +285,11 @@ map = (values, keys) ->
   r = {}
   r[k] = values[i] for k, i in keys
   r
+
+exports.containsAnyOf = 
+containsAnyOf = (ys, xs) ->
+  return true for y in ys when Object.equals y, x for x in xs 
+  false
 
 exports.contains = 
 contains = (y, xs) -> 

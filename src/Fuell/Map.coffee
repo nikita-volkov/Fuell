@@ -1,6 +1,44 @@
 Object = require "./Object"
 # Pairs = require "./Pairs"
 
+exports.union = 
+union = (y, x) ->
+  r = {}
+  r[k] = v for k, v of x
+  r[k] = v for k, v of y
+  r
+
+# valueBy | member
+exports.value = 
+value = (k, m) ->
+  m[k]
+
+exports.setting = 
+setting = (k, v, m) ->
+  r = {}
+  r[k1] = v1 for k1, v1 of m
+  r[k] = v
+  r
+
+exports.settingPair = 
+settingPair = ([k, v], m) ->
+  r = {}
+  r[k1] = v1 for k1, v1 of m
+  r[k] = v
+  r
+
+exports.results = 
+results = (f, m) ->
+  f k, v for k, v of m
+
+exports.pairsResults = 
+pairsResults = (f, m) ->
+  f [k, v] for k, v of m
+
+exports.empty = 
+empty = (m) -> 
+  return false for k of m
+  true
 
 exports.hasKey = 
 hasKey = Object.hasMember

@@ -16,6 +16,7 @@ result = FunctionComposing.Function.composable (f, o) ->
 GENERAL
 ###
 
+# deprecated
 exports.union = 
 union = (y, x) ->
   r = {}
@@ -50,6 +51,7 @@ type = (x) -> x?.constructor
 exports.isNull = 
 isNull = (x) -> !x?
 
+# isEmpty
 exports.empty = 
 empty = (x) ->
   return x.length == 0 if (instanceOf Array, x) || (instanceOf String, x)

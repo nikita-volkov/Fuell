@@ -11,14 +11,17 @@ exports[name] = require "./Fuell/#{name}" for name in [
   "FunctionTemplate"
   "Keys"
   "Map"
+  "Maps"
   "Number"
+  "Numbers"
   "Object"
   "Optional"
+  "Optionals"
   "Pair"
   "Pairs"
-  'RegExp'
-  'Set'
-  'SortedArray'
+  "RegExp"
+  "Set"
+  "SortedArray"
   "String"
   "Strings"
   "Text"

@@ -1,8 +1,7 @@
 .idea
 *.iml
-target
-js
-examples
+*.sublime*
 node_modules
-*.sublime-project
-*.sublime-workspace
+target
+lib
+examples
