@@ -12,4 +12,5 @@ text =
       currentGroup = "textAfterTests"
   """
 text = Text.indented 4, text
+text += "\n"
 console.log Text.unindented text

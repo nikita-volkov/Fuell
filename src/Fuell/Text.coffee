@@ -32,11 +32,22 @@ indentation = (text) ->
   Array.minBy ((indentation) -> indentation.length), 
   Array.results String.indentation, 
   lines text
+
+exports.smartIndentation = 
+smartIndentation = (text) ->
+  ###
+  Ignores textless lines
+  ###
+  Array.minBy ((indentation) -> indentation.length), 
+  Array.results String.indentation, 
+  Array.matches ((line) -> !String.doesMatch /^\s*$/, line),
+  lines text
+
   
 
 exports.unindented = 
 unindented = (text) ->
-  Strings.multilineText Array.results [String.remainder, indentation text], lines text
+  Strings.multilineText Array.results [String.remainder, smartIndentation text], lines text
 
   # String.replacing(
   #   "\n" + indentation text
