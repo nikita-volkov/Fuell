@@ -30,19 +30,27 @@ indentation = (text) ->
   Detects minimum indentation in text
   ###
   Array.minBy ((indentation) -> indentation.length), 
-  Array.results String.indentation, lines text
+  Array.results String.indentation, 
+  lines text
   
 
 exports.unindented = 
 unindented = (text) ->
-  String.replacing(
-    "\n" + indentation text
-    "\n"
-    text
-  )
+  Strings.multilineText Array.results [String.remainder, indentation text], lines text
+
+  # String.replacing(
+  #   "\n" + indentation text
+  #   "\n"
+  #   text
+  # )
 
 exports.lines = 
 lines = (text) ->
   text.split /\r\n|\r|\n/
   
-
+exports.trimmed = 
+trimmed = (text) ->
+  ###
+  Drops blank entry lines and all remaining whitespace
+  ###
+  String.replacing /^[\r\n]+|\s+$/g, "", text

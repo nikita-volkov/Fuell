@@ -11,6 +11,13 @@ result = FunctionComposing.Function.composable (f, o) ->
   throw "deprecated: Object.result in favor of Optional.result"
   f o if o? 
 
+exports.optional = 
+optional = FunctionComposing.Function.composable (f, x) ->
+  x if f x
+
+# exports.either = 
+# either = (p, y, x) -> if p x then x else y
+
 
 ###
 GENERAL
@@ -86,11 +93,4 @@ before = (ys, x) -> ys.concat [x]
 exports.self = 
 self = (x) -> x
 
-
-
-# exports.maybe = 
-# maybe = (p, x) -> x if p x 
-
-# exports.either = 
-# either = (p, y, x) -> if p x then x else y
 

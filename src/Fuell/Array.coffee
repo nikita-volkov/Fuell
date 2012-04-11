@@ -46,9 +46,30 @@ each = Async.Function.async (action, xs, cb) ->
 ### 
 HIGHER ORDER 
 ###
+exports.groupsWithHeadings = 
+groupsWithHeadings = FunctionComposing.Function.composable (p, xs) ->
+  ###
+  TESTS:
+    @equals [[1,2,3],[1,6]], 
+      groupsWithHeadings ((x) -> x == 1), [1,2,3,1,6]
+  ###
+  leftReduction(
+    (r, x) -> 
+      if p x
+        appending [x], r
+      else if r.length > 0
+        appending(
+          appending x, last r
+          allButLast r
+        )
+      else throw "Input doesn't begin with header"
+    []
+    xs
+  )
+
 
 exports.count = 
-count = (f, xs) ->
+count = FunctionComposing.Function.composable (f, xs) ->
   ###
   Count of matching elements
   ###
@@ -67,17 +88,20 @@ count = (f, xs) ->
 #     return Udon.foldl1(minBy, xs);
 # };
 exports.minBy = 
-minBy = (f, xs) ->
+minBy = FunctionComposing.Function.composable (f, xs) ->
   r = null
+  z = null
   for x in xs
-    z = f x
-    r = z if z > r || !r?
+    z1 = f x
+    if z1 < z || !z?
+      z = z1
+      r = x
   r
   
 
 # spanned|broken
 exports.spread = 
-spread = (f, xs) ->
+spread = FunctionComposing.Function.composable (f, xs) ->
   r1 = []
   r2 = []
   for x in xs
@@ -264,12 +288,14 @@ reversed = (xs) ->
   xs[i] for i in [xs.length-1..0]
 
 exports.appending =
+appending =
 exports.appendedWith =
 appendedWith = (y, xs) ->
   if y? then xs.concat [y]
   else xs
 
 exports.prepending =
+prepending =
 exports.prependedWith = 
 prependedWith = (y, xs) -> 
   if y? then [y].concat xs
