@@ -7,8 +7,14 @@
   "homepage": null,
   "repository": {
     "type": "git",
-    "url": null
+    "url": "http://github.com/nikita-volkov/Fuell"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/nikita-volkov/Fuell/master/LICENSE"
+    }
+  ],
   "main": "lib/Fuell.js",
   "directories": {
     "lib": "lib"
@@ -19,6 +25,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "jasmine-node": "1.0.20"
+    "jasmine-node": "1.0.20",
+    "coffee-script": "1.3.x"
   }
 }
