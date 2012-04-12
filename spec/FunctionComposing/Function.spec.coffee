@@ -1,8 +1,7 @@
-describe "HOFU", ->
-  HOFU = require "../src/HOFU"
+describe "Function", ->
+  {composableByPositions} = require "../../src/FunctionComposing/Function"
 
   describe "composableByPositions", ->
-    {composableByPositions} = HOFU
     it "works", ->
       d = [[matches, isEven], [mapped, [sum, 2]]]
       f = composableByPositions [0], result

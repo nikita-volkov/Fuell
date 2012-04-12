@@ -1,14 +1,19 @@
-describe "Function", ->
-  {Action, Array, Arrays, Environment, Function, Functions, Keys, Map, Number, Object, Optional, Pair, Pairs, String, Strings} = require "../../src/Fuell"
+describe "Functions.Basic", ->
 
-  describe "async", ->
-    {async} = Function
-    addTwo = async (a, cb) -> cb a + 2
-    it "works", ->
-      result = null
-      runs -> addTwo 3, (x) -> result = x
-      waits 1
-      runs -> expect(result).toEqual 5
+  # describe "a partially applied function", ->
+
+  #   it "has length as large as arguments unapplied", ->
+  #     f = partiallyApply [8], (a, b, c, d) -> a + b
+  #     (expect f.length).toEqual 3
+  #     f = partiallyApply [], (a, b, c, d) -> a + b
+  #     (expect f.length).toEqual 4
+  #     f = partiallyApply [1, 2, 3, 4], (a, b, c, d) -> a + b
+  #     (expect f.length).toEqual 0
+
+  #   it "produces correct results", ->
+
+  #     f = partiallyApply [8], (a, b, c) -> a + b
+  #     expect(f 9, 12).toEqual 17
 
   # describe "a 4 argument function arguments remapping", ->
   #   f = (a,b,c,d) -> a + b * 2 - c - d

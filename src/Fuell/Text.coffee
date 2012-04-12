@@ -2,9 +2,13 @@ String = require "./String"
 Array = require "./Array"
 Strings = require "./Strings"
 
-exports.equals = 
-equals = (y, x) ->
-  throw "TODO: Text.equals"
+# exports.equals = 
+# equals = (y, x) ->
+#   throw "Unimplemented: Text.equals"
+
+# exports.normalized = 
+# normalized = (text) ->
+#   throw "Unimplemented: Text.normalized"
 
 exports.indented = 
 indented = (spaces, text) ->
@@ -14,8 +18,6 @@ indented = (spaces, text) ->
   
   # (indentation + line for line in lines text).join "\n"
   Strings.multilineText Array.results ((l) -> indentation + l), lines text 
-
-
 # exports.indented = 
 # indented = (spaces, text) ->
 #   indentation = repeated spaces, " "
@@ -27,25 +29,39 @@ indentation = (text) ->
   ###
   Detects minimum indentation in text
   ###
-  # r = ""
-  # length = 0
-  # for line in lines
-  #   String
-
   Array.minBy ((indentation) -> indentation.length), 
-  Array.results String.indentation, lines text
+  Array.results String.indentation, 
+  lines text
+
+exports.smartIndentation = 
+smartIndentation = (text) ->
+  ###
+  Ignores textless lines
+  ###
+  Array.minBy ((indentation) -> indentation.length), 
+  Array.results String.indentation, 
+  Array.matches ((line) -> !String.doesMatch /^\s*$/, line),
+  lines text
+
   
 
 exports.unindented = 
 unindented = (text) ->
-  String.replacing(
-    "\n" + indentation text
-    "\n"
-    text
-  )
+  Strings.multilineText Array.results [String.remainder, smartIndentation text], lines text
+
+  # String.replacing(
+  #   "\n" + indentation text
+  #   "\n"
+  #   text
+  # )
 
 exports.lines = 
 lines = (text) ->
   text.split /\r\n|\r|\n/
   
-
+exports.trimmed = 
+trimmed = (text) ->
+  ###
+  Drops blank entry lines and all remaining whitespace
+  ###
+  String.replacing /^[\r\n]+|\s+$/g, "", text

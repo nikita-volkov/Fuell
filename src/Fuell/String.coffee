@@ -60,6 +60,10 @@ exports.empty =
 empty = (x) -> 
   x.length == 0
 
+exports.optional = 
+optional = (x) ->
+  x if x.length != 0
+
 exports.dropping = 
 dropping = (n, string) ->
   string.substr n

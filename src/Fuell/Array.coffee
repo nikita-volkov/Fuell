@@ -1,5 +1,6 @@
+Async = require "../Async"
+FunctionComposing = require "../FunctionComposing"
 Object = require "./Object"
-HOFU = require "../HOFU"
 
 exports.Array = Array
 
@@ -9,7 +10,7 @@ ASYNC ACTIONS
 ###
 # processBy
 exports.collect =
-collect = HOFU.async (action, xs, cb) ->
+collect = Async.Function.async (action, xs, cb) ->
   zs = []
   for x in xs
     action x, (z) ->
@@ -29,7 +30,7 @@ collectResults = (action, xs, cb) ->
   return
 
 exports.each = 
-each = HOFU.async (action, xs, cb) ->
+each = Async.Function.async (action, xs, cb) ->
   if xs.length > 0
     finished = 0
     for x in xs
@@ -45,6 +46,37 @@ each = HOFU.async (action, xs, cb) ->
 ### 
 HIGHER ORDER 
 ###
+exports.groupsWithHeadings = 
+groupsWithHeadings = FunctionComposing.Function.composable (p, xs) ->
+  ###
+  TESTS:
+    @equals [[1,2,3],[1,6]], 
+      groupsWithHeadings ((x) -> x == 1), [1,2,3,1,6]
+  ###
+  leftReduction(
+    (r, x) -> 
+      if p x
+        appending [x], r
+      else if r.length > 0
+        appending(
+          appending x, last r
+          allButLast r
+        )
+      else throw "Input doesn't begin with header"
+    []
+    xs
+  )
+
+
+exports.count = 
+count = FunctionComposing.Function.composable (f, xs) ->
+  ###
+  Count of matching elements
+  ###
+  r = 0
+  r++ for x in xs when f x
+  r
+
 
 # Udon.maximumBy = function(cmp, xs) {
 #     var maxBy = function(x, y) { return cmp(x, y) === 1 ? x : y; };
@@ -56,17 +88,20 @@ HIGHER ORDER
 #     return Udon.foldl1(minBy, xs);
 # };
 exports.minBy = 
-minBy = (f, xs) ->
+minBy = FunctionComposing.Function.composable (f, xs) ->
   r = null
+  z = null
   for x in xs
-    z = f x
-    r = z if z > r || !r?
+    z1 = f x
+    if z1 < z || !z?
+      z = z1
+      r = x
   r
   
 
 # spanned|broken
 exports.spread = 
-spread = (f, xs) ->
+spread = FunctionComposing.Function.composable (f, xs) ->
   r1 = []
   r2 = []
   for x in xs
@@ -75,17 +110,17 @@ spread = (f, xs) ->
   [r1, r2]
 
 exports.resultPairs = 
-resultPairs = HOFU.composable (f, keys) -> 
+resultPairs = FunctionComposing.Function.composable (f, keys) -> 
   [k, f k] for k in keys
 
 exports.leftReduction = 
-leftReduction = HOFU.composable (f, r, xs) ->
+leftReduction = FunctionComposing.Function.composable (f, r, xs) ->
   for x in xs
     r = f r, x
   r
 
 exports.rightReduction = 
-rightReduction = HOFU.composable (f, y0, xs) -> 
+rightReduction = FunctionComposing.Function.composable (f, y0, xs) -> 
   y = y0
   for i in [(xs.length - 1)..0]
     y = f xs[i], y
@@ -93,46 +128,54 @@ rightReduction = HOFU.composable (f, y0, xs) ->
 
 # not `reduced` since the returned type changes
 exports.reduction = 
-reduction = HOFU.composable (f, xs) -> 
+reduction = FunctionComposing.Function.composable (f, xs) -> 
   rightReduction f, (last xs), (allButLast xs) if xs.length > 0
 
 
 exports.firstResult = 
-firstResult = HOFU.composable (f, xs) ->
+firstResult = FunctionComposing.Function.composable (f, xs) ->
   return z for x in xs when (z = f x)?
 
 exports.result = 
-result = HOFU.composable (f, xs) ->
+result = FunctionComposing.Function.composable (f, xs) ->
+  ###
+  Get either the same array or null if it contains a null
+  ###
   for x in xs
     z = f x
     return null if !z?
     z
 
+# processed
+# Optionals.results
 exports.results = 
-results = HOFU.composable (f, xs) ->
+results = FunctionComposing.Function.composable (f, xs) ->
+  ###
+  
+  ###
   z for x in xs when (z = f x)?
 
 exports.allMatch = 
-allMatch = HOFU.composable (f, xs) ->
+allMatch = FunctionComposing.Function.composable (f, xs) ->
   return false for x in xs when not f x
   true
 
 exports.someMatch = 
-someMatch = HOFU.composable (f, xs) ->
+someMatch = FunctionComposing.Function.composable (f, xs) ->
   return true for x in xs when f x
   false
 
 exports.noneMatch = 
-noneMatch = HOFU.composable (f, xs) ->
+noneMatch = FunctionComposing.Function.composable (f, xs) ->
   return false for x in xs when f x
   true
 
 exports.matches = 
-matches = HOFU.composable (f, xs) ->
+matches = FunctionComposing.Function.composable (f, xs) ->
   x for x in xs when f x
 
 exports.firstMatch = 
-firstMatch = HOFU.composable (f, xs) ->
+firstMatch = FunctionComposing.Function.composable (f, xs) ->
   return x for x in xs when f x
 
 
@@ -245,12 +288,14 @@ reversed = (xs) ->
   xs[i] for i in [xs.length-1..0]
 
 exports.appending =
+appending =
 exports.appendedWith =
 appendedWith = (y, xs) ->
   if y? then xs.concat [y]
   else xs
 
 exports.prepending =
+prepending =
 exports.prependedWith = 
 prependedWith = (y, xs) -> 
   if y? then [y].concat xs
@@ -266,6 +311,11 @@ map = (values, keys) ->
   r = {}
   r[k] = values[i] for k, i in keys
   r
+
+exports.containsAnyOf = 
+containsAnyOf = (ys, xs) ->
+  return true for y in ys when Object.equals y, x for x in xs 
+  false
 
 exports.contains = 
 contains = (y, xs) -> 

@@ -1,4 +1,4 @@
-HOFU = require "../HOFU"
+FunctionComposing = require "../FunctionComposing"
 
 exports.Object = Object
 
@@ -7,15 +7,23 @@ HIGHER ORDER
 ###
 
 exports.result = 
-result = HOFU.composable (f, o) -> 
+result = FunctionComposing.Function.composable (f, o) -> 
   throw "deprecated: Object.result in favor of Optional.result"
   f o if o? 
+
+exports.optional = 
+optional = FunctionComposing.Function.composable (f, x) ->
+  x if f x
+
+# exports.either = 
+# either = (p, y, x) -> if p x then x else y
 
 
 ###
 GENERAL
 ###
 
+# deprecated
 exports.union = 
 union = (y, x) ->
   r = {}
@@ -50,6 +58,7 @@ type = (x) -> x?.constructor
 exports.isNull = 
 isNull = (x) -> !x?
 
+# isEmpty
 exports.empty = 
 empty = (x) ->
   return x.length == 0 if (instanceOf Array, x) || (instanceOf String, x)
@@ -84,11 +93,4 @@ before = (ys, x) -> ys.concat [x]
 exports.self = 
 self = (x) -> x
 
-
-
-# exports.maybe = 
-# maybe = (p, x) -> x if p x 
-
-# exports.either = 
-# either = (p, y, x) -> if p x then x else y
 

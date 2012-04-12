@@ -1,5 +1,3 @@
-require "./Object"
-
 exports.func = 
 func = (template) ->
   ->
@@ -9,5 +7,8 @@ func = (template) ->
 
 argsMatchTypes = (types, args) ->
   return false if args.length != types.length
-  return false for t, i in types when t? && !Object.instanceOf t, args[i]
+  return false for t, i in types when t? && !instanceOf t, args[i]
   true
+
+instanceOf = (t, x) -> (x instanceof t) || (t == type x)
+type = (x) -> x?.constructor

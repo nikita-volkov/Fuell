@@ -1,4 +1,11 @@
 Array = require "./Array"
+Object = require "./Object"
+
+
+# valueBy | member
+exports.value = 
+value = (key, pairs) ->
+  return v for [k, v] in pairs when Object.equals key, k
 
 
 exports.map = 

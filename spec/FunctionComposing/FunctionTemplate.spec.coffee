@@ -1,5 +1,5 @@
-describe "ComposedFuncTemplate", ->
-  {func} = require "../../src/HOFU/FuncTemplate"
+describe "FunctionTemplate", ->
+  {func} = require "../../src/FunctionComposing/FunctionTemplate"
 
   describe "func", ->
 

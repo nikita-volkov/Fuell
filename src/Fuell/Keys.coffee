@@ -1,6 +1,6 @@
 # Most probably a useless module
 
-HOFU = require "../HOFU"
+FunctionComposing = require "../FunctionComposing"
 
 exports.pairs =
 pairs = (values, keys) -> [k, values[i]] for k, i in keys
@@ -13,6 +13,5 @@ map = (values, keys) ->
 
 # Fits fine in Array
 exports.resultPairs = 
-resultPairs = HOFU.composable (f, keys) -> 
+resultPairs = FunctionComposing.Function.composable (f, keys) -> 
   [k, f k] for k in keys
-
