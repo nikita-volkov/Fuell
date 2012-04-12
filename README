@@ -1,0 +1,11 @@
+Fuell
+
+This library is highly influenced by the Haskell programming language. It borrows several concepts from it, evolves some and adapts some to the dynamic nature of the JavaScript environment. 
+
+One of Fuell's most prominent features is that functions are named not after what they do, but what they result in, only functions that have side effects are named after what they do. This introduces ability to program in a purely declarative style. 
+
+Besides this strict convention solves the ambiguity around how to name your functions. For instance in any language and even such a great one as Haskell you can meet all sorts of naming conventions: `filter`, `decodeFloat`, `floatDigits`, `toEnum`, `fromEnum`. All those different types of function names produce only confusion. Fuell tries to put an end to it. 
+
+So, for example, how should one name a pure function which returns digits from a float? The usual choices are something like that: collectDigits, getDigits, digits, toDigits. `digits` would be the right choice. The only declarative one.
+
+All the other aspects of Fuell library are yet to be described.

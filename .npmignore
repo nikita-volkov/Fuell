@@ -1,7 +1,8 @@
+.*
 .idea
 *.iml
 *.sublime*
-node_modules
-target
-lib
+src/
+test/
+Cakefile
 npm-debug.log
