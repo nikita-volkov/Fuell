@@ -3,7 +3,7 @@
   "name": "Fuell",
   "description": "A library for purely declarative functional programming with support for async actions",
   "keywords": ["functional", "declarative", "async", "library", "haskell", "coffeescript"],
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": null,
   "repository": {
     "type": "git",
