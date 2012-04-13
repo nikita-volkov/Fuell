@@ -1,9 +1,9 @@
 {
   "author": "Nikita Volkov <nikita.y.volkov@mail.ru> (http://www.flipart.ru)",
   "name": "Fuell",
-  "description": "A library for purely declarative functional programming with support for async actions",
+  "description": "A library for purely declarative functional programming with support for async actions and such niceties as function composing, overloading and memoization",
   "keywords": ["functional", "declarative", "async", "library", "haskell", "coffeescript"],
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": null,
   "repository": {
     "type": "git",
