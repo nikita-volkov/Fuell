@@ -15,9 +15,9 @@ collect = Async.Function.async (action, xs, cb) ->
   for x in xs
     action x, (z) ->
       zs.push z
-      cb zs if zs.length == xs.length
+      cb? zs if zs.length == xs.length
       return
-  cb zs unless xs.length > 0
+  cb? zs unless xs.length > 0
   return
 
 exports.collectResults =
@@ -25,7 +25,7 @@ collectResults = (action, xs, cb) ->
   collect action, xs, (zs) ->
     zs1 = []
     zs1.push z for z in zs when z?
-    cb zs1
+    cb? zs1
     return
   return
 
@@ -36,9 +36,9 @@ each = Async.Function.async (action, xs, cb) ->
     for x in xs
       action x, ->
         finished++
-        cb() if finished == xs.length
+        cb?() if finished == xs.length
         return
-  else cb()
+  else cb?()
   return
 
 

@@ -15,6 +15,6 @@ callAsync = (f) ->
 exports.action = 
 action = (f) ->
   async (args..., cb) ->
-    cb f.apply this, args
+    cb? f.apply this, args
 
 

@@ -7,9 +7,9 @@ callParallelly = Async.Function.async (fs, cb) ->
   for f in fs
     f (result) ->
       results.push result
-      cb results if results.length == fs.length
+      cb? results if results.length == fs.length
       return
-  cb results unless fs.length > 0
+  cb? results unless fs.length > 0
   return
 
 # deprecated in favor of `queue`
@@ -18,7 +18,7 @@ callConsecutively = (actions, cb) ->
   queue = (a for a in actions)
   callNext = ->
     if queue.length > 0 then queue.shift() callNext
-    else cb()
+    else cb?()
   callNext()
   return
   # throw "Unimplemented: Actions.callConsecutively"

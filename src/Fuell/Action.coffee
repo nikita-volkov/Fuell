@@ -6,7 +6,8 @@ Function  = require "./Function"
 exports.disposable = 
 disposable = (f) ->
   ->
-    throw "The arguments must contain only a callback" unless arguments.length == 1 && Object.instanceOf Function, arguments[0]
+    unless arguments.length == 1 && Object.instanceOf Function, arguments[0]
+      throw "The arguments must contain only a callback" 
     if f.executed
       # cb = Array.last arguments
       # throw "Last argument is not a callback" unless cb instanceof Function
@@ -21,7 +22,7 @@ exports.conditional =
 conditional = (predicate, action) ->
   (args..., cb) ->
     if (predicate.apply this, args) then action.apply this, arguments
-    else cb()
+    else cb?()
 
 # exports.callWhen = 
 # callWhen = (condition, action, cb) ->
